@@ -441,15 +441,9 @@
                         ]
                     },
                     "resultDescription": {
-                      "type": [
-                          "array",
-                          "boolean",
-                          "number",
-                          "string", 
-                          "object"
-                      ],
-                      "description": "Description of the result, e.g., the result of a RFID-read. Errors will be transmitted in errors."
-}
+                        "type": "string",
+                        "description": "Description of the result, e.g., the result of a RFID-read. Errors will be transmitted in errors."
+                    }
                 }
             }
         },

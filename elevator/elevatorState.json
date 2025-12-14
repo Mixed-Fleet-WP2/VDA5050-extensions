@@ -50,7 +50,7 @@
       "type": "string",
       "description": "Serial number of the AGV."
     },
-    "maps": {
+    "maps":{
       "type": "array",
       "description": "Array of map-objects that are currently stored on the vehicle.",
       "items": {
@@ -105,9 +105,9 @@
       "type": "integer",
       "description": "sequenceId of the last reached node or, if the AGV is currently on a node, sequenceId of current node. \"0\" if no lastNodeSequenceId is available. "
     },
-    "driving": {
+    "transitioning": {
       "type": "boolean",
-      "description": "True: indicates that the AGV is driving and/or rotating. Other movements of the AGV (e.g., lift movements) are not included here.\nFalse: indicates that the AGV is neither driving nor rotating"
+      "description": "True: indicates that the elevator is in the process of moving between floors. Other movements of the AGV (e.g., lift movements) are not included here.\nFalse: indicates that the AGV is neither driving nor rotating"
     },
     "paused": {
       "type": "boolean",
@@ -230,8 +230,8 @@
                 "description": "Sequence of parameter values that determine where and how the control points affect the NURBS curve. knotVector has size of number of control points + degree + 1",
                 "items": {
                   "type": "number",
-                  "maximum": 1,
-                  "minimum": 0
+                  "maximum": 1.0,
+                  "minimum": 0.0
                 }
               },
               "controlPoints": {
@@ -280,7 +280,12 @@
     "velocity": {
       "type": "object",
       "description": "The AGVs velocity in vehicle coordinates",
-      "properties": {}
+      "properties": {
+         "vz": {
+          "type": "number",
+          "description": "Elevator's current velocity"
+        }
+      }
     },
     "actionStates": {
       "type": "array",
@@ -344,14 +349,14 @@
         "batteryHealth": {
           "type": "number",
           "description": "State of health in percent.",
-          "minimum": 0,
-          "maximum": 100
+          "minimum":0,
+          "maximum":100
         }
       }
     },
     "errors": {
       "type": "array",
-      "description": "Array of error-objects. All active errors of the AGV should be in the list. An empty array indicates that the AGV has no active errors.",
+      "description": "Array of error-objects. All active errors of the elevator should be in the list. An empty array indicates that the elevator has no active errors.",
       "items": {
         "type": "object",
         "required": [
@@ -373,11 +378,11 @@
               "properties": {
                 "referenceKey": {
                   "type": "string",
-                  "description": "Specifies the type of reference used (e.g. nodeId, edgeId, orderId, actionId, etc.)."
+                  "description":"Specifies the type of reference used (e.g. nodeId, edgeId, orderId, actionId, etc.)."
                 },
                 "referenceValue": {
                   "type": "string",
-                  "description": "The value that belongs to the reference key. For example, the id of the node where the error occurred."
+                  "description":"The value that belongs to the reference key. For example, the id of the node where the error occurred."
                 }
               },
               "required": [
@@ -396,7 +401,7 @@
           },
           "errorLevel": {
             "type": "string",
-            "description": "WARNING: AGV is ready to start (e.g., maintenance cycle expiration warning). FATAL: AGV is not in running condition, user intervention required (e.g., laser scanner is contaminated).",
+            "description": "WARNING: elevator is ready to operate (e.g., maintenance cycle expiration warning). FATAL: elevator is not in running condition, user intervention required (e.g. issue with the motor).",
             "enum": [
               "WARNING",
               "FATAL"
@@ -432,11 +437,11 @@
               "properties": {
                 "referenceKey": {
                   "type": "string",
-                  "description": "References the type of reference (e.g., headerId, orderId, actionId, etc.)."
+                  "description":"References the type of reference (e.g., headerId, orderId, actionId, etc.)."
                 },
                 "referenceValue": {
                   "type": "string",
-                  "description": "References the value, which belongs to the reference key."
+                  "description":"References the value, which belongs to the reference key."
                 }
               }
             }
@@ -459,8 +464,7 @@
     "safetyState": {
       "type": "object",
       "required": [
-        "eStop",
-        "fieldViolation"
+        "eStop"
       ],
       "description": "Contains all safety-related information.",
       "properties": {
@@ -473,11 +477,8 @@
             "REMOTE",
             "NONE"
           ]
-        },
-        "fieldViolation": {
-          "type": "boolean",
-          "description": "Protective field violation. True: field is violated. False: field is not violated."
         }
+        
       }
     }
   }
