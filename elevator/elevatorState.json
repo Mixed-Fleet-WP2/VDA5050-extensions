@@ -44,11 +44,11 @@
     },
     "manufacturer": {
       "type": "string",
-      "description": "Manufacturer of the AGV"
+      "description": "Manufacturer of the elevator"
     },
     "serialNumber": {
       "type": "string",
-      "description": "Serial number of the AGV."
+      "description": "Serial number of the elevator."
     },
     "maps":{
       "type": "array",
@@ -76,7 +76,7 @@
           },
           "mapStatus": {
             "type": "string",
-            "description": "Information on the status of the map indicating, if a map version is currently used on the vehicle. ENABLED: Indicates this map is currently active / used on the AGV. At most one map with the same mapId can have its status set to ENABLED.<br>DISABLED: Indicates this map version is currently not enabled on the AGV and thus could be enabled or deleted by request.",
+            "description": "Information on the status of the map indicating, if a map version is currently used by the elevator. ENABLED: Indicates this map is currently active / used on the elevator. At most one map with the same mapId can have its status set to ENABLED.<br>DISABLED: Indicates this map version is currently not enabled on the elevator and thus could be enabled or deleted by request.",
             "enum": [
               "ENABLED",
               "DISABLED"
@@ -91,11 +91,7 @@
     },
     "orderUpdateId": {
       "type": "integer",
-      "description": "Order Update Identification to identify that an order update has been accepted by the AGV. \"0\" if no previous orderUpdateId is available."
-    },
-    "zoneSetId": {
-      "type": "string",
-      "description": "Unique ID of the zone set that the AGV currently uses for path planning. Must be the same as the one used in the order, otherwise the AGV is to reject the order.\nOptional: If the AGV does not use zones, this field can be omitted."
+      "description": "Order Update Identification to identify that an order update has been accepted by the elevator. \"0\" if no previous orderUpdateId is available."
     },
     "lastNodeId": {
       "type": "string",
@@ -158,29 +154,6 @@
           "released": {
             "type": "boolean",
             "description": "True: indicates that the node is part of the base. False: indicates that the node is part of the horizon."
-          },
-          "nodePosition": {
-            "type": "object",
-            "required": [
-              "x",
-              "y",
-              "mapId"
-            ],
-            "description": "Node position. The object is defined in chapter 5.4 Topic: Order (from master control to AGV).\nOptional:Master control has this information. Can be sent additionally, e.g., for debugging purposes. ",
-            "properties": {
-              "x": {
-                "type": "number"
-              },
-              "y": {
-                "type": "number"
-              },
-              "theta": {
-                "type": "number"
-              },
-              "mapId": {
-                "type": "string"
-              }
-            }
           }
         }
       }
@@ -211,53 +184,6 @@
           "released": {
             "type": "boolean",
             "description": "True indicates that the edge is part of the base. False indicates that the edge is part of the horizon."
-          },
-          "trajectory": {
-            "type": "object",
-            "description": "The trajectory is to be communicated as a NURBS and is defined in chapter 6.7 Implementation of the Order message.\nTrajectory segments reach from the point, where the AGV starts to enter the edge to the point where it reports that the next node was traversed. ",
-            "required": [
-              "degree",
-              "knotVector",
-              "controlPoints"
-            ],
-            "properties": {
-              "degree": {
-                "type": "integer",
-                "description": "Defines the number of control points that influence any given point on the curve. Increasing the degree increases continuity. If not defined, the default value is 1."
-              },
-              "knotVector": {
-                "type": "array",
-                "description": "Sequence of parameter values that determine where and how the control points affect the NURBS curve. knotVector has size of number of control points + degree + 1",
-                "items": {
-                  "type": "number",
-                  "maximum": 1.0,
-                  "minimum": 0.0
-                }
-              },
-              "controlPoints": {
-                "type": "array",
-                "description": "List of JSON controlPoint objects defining the control points of the NURBS, which includes the beginning and end point.",
-                "items": {
-                  "type": "object",
-                  "required": [
-                    "x",
-                    "y"
-                  ],
-                  "properties": {
-                    "x": {
-                      "type": "number"
-                    },
-                    "y": {
-                      "type": "number"
-                    },
-                    "weight": {
-                      "type": "number",
-                      "description": "The weight, with which this control point pulls on the curve.\nWhen not defined, the default will be 1.0."
-                    }
-                  }
-                }
-              }
-            }
           }
         }
       }
@@ -274,16 +200,6 @@
         },
         "mapDescription": {
           "type": "string"
-        }
-      }
-    },
-    "velocity": {
-      "type": "object",
-      "description": "The AGVs velocity in vehicle coordinates",
-      "properties": {
-         "vz": {
-          "type": "number",
-          "description": "Elevator's current velocity"
         }
       }
     },
@@ -315,7 +231,7 @@
           },
           "actionStatus": {
             "type": "string",
-            "description": "WAITING: waiting for the trigger (passing the mode, entering the edge) PAUSED: paused by instantAction or external trigger FAILED: action could not be performed.",
+            "description": "WAITING: waiting for the trigger (e.g. waiting for a button press) PAUSED: paused by instantAction or external trigger FAILED: action could not be performed.",
             "enum": [
               "WAITING",
               "INITIALIZING",
@@ -328,29 +244,6 @@
             "type": "string",
             "description": "Description of the result, e.g., the result of a RFID-read. Errors will be transmitted in errors."
           }
-        }
-      }
-    },
-    "batteryState": {
-      "type": "object",
-      "description": "Contains all battery-related information.",
-      "required": [
-        "batteryCharge"
-      ],
-      "properties": {
-        "batteryCharge": {
-          "type": "number",
-          "description": "State of Charge in %:\nIf AGV only provides values for good or bad battery levels, these will be indicated as 20% (bad) and 80% (good)."
-        },
-        "batteryVoltage": {
-          "type": "number",
-          "description": "Battery voltage"
-        },
-        "batteryHealth": {
-          "type": "number",
-          "description": "State of health in percent.",
-          "minimum":0,
-          "maximum":100
         }
       }
     },
