@@ -1,0 +1,51 @@
+{
+  "headerId": 314,
+  "timestamp": "2025-03-11T10:16:05.00Z",
+  "version": "1.3.2",
+  "manufacturer": "KONE",
+  "serialNumber": "ELV-001",
+
+  "orderId": "order-12345",
+  "orderUpdateId": 0,
+
+  "lastNodeId": "floor_1",
+  "lastNodeSequenceId": 0,
+
+  "transitioning": true,
+
+  "operatingMode": "DUAL",
+
+  "nodeStates": [
+    {
+      "nodeId": "floor_1",
+      "sequenceId": 0,
+      "released": true
+    },
+    {
+      "nodeId": "floor_5",
+      "sequenceId": 2,
+      "released": true
+    }
+  ],
+
+  "edgeStates": [
+    {
+      "edgeId": "edge_floor_1_to_5",
+      "sequenceId": 1,
+      "released": true
+    }
+  ],
+
+  "actionStates": [
+    {
+      "actionId": "open-doors-uuid",
+      "actionStatus": "WAITING"
+    }
+  ],
+
+  "errors": [],
+
+  "safetyState": {
+    "eStop": "NONE"
+  }
+}
