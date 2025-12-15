@@ -290,7 +290,7 @@
     },
     "information": {
       "type": "array",
-      "description": "Array of info-objects. An empty array indicates, that the AGV has no information. This should only be used for visualization or debugging – it must not be used for logic in master control.",
+      "description": "Array of info-objects. An empty array indicates, that the elevator has no information. This should only be used for visualization or debugging – it must not be used for logic in master control.",
       "items": {
         "type": "object",
         "required": [
