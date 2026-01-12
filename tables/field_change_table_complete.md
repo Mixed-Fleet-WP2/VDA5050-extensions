@@ -1,0 +1,104 @@
+Field	Description	Change	Basis schema	New schema	Related feature	Rationale
+nodes.nodePosition.z 	"Describes the Z position of a node that is part of the order in reference to
+the used map"	New field	order.json	order.json	3D navigation	
+nodes.nodePosition.roll 	"Specifies the roll angle of the AGV/UAV at a given node. This value
+represents the orientation that the vehicle must achieve for it to be
+considered as positioned on the node"	New field	order.json	order.json	3D navigation	
+nodes.nodePosition.pitch	"Specifies the pitch angle of the AGV/UAV at a given node. This value
+represents the orientation that the vehicle must achieve for it to be
+considered as positioned on the node."	New field	order.json	order.json	3D navigation	
+nodes.nodePosition.allowedDeviationZ	"Indicates how exact an AGV/UAV has to pass over a node in reference to
+the z-axis for it to count as traversed"	New field	order.json	order.json	3D navigation	
+nodes.nodePosition.allowedDeviationRoll 	"Indicates how big the deviation of roll angle of the vehicle can from the
+node’s roll angle while still counting the node as traversed by the vehicle"	New field	order.json	order.json	3D navigation	
+nodes.nodePosition.allowedDeviationPitch	"Indicates how big the deviation of pitch angle of the vehicle can from the
+node’s pitch angle while still counting the node as traversed by the vehicle"	New field	order.json	order.json	3D navigation	
+edges.trajectory.controlPoints.z 	"Describes the z-coordinate of a control point that describes the NURBS-
+curve depicting and edge’s trajectory"	New field	order.json	order.json	3D navigation	
+edges.corridor.upperHeight	"Defines the upper height (calculating from corridor reference point) of the
+corridor in meters related to the trajectory of the vehicle. Corridor specifies
+how much the vehicle is allowed to deviate from a given trajectory."	New field	order.json	order.json	3D navigation	
+edges.corridor.lowerHeight	"Defines the lower height (calculating from corridor reference point) of the
+corridor in meters related to the trajectory of the vehicle."	New field	order.json	order.json	3D navigation	
+nodeStates.nodePosition.z	Optional z coordinate of the node. If the AGV/UAV operates in a 2D plane, this value may be omitted.	New field	state.json	state.json	3D navigation	
+nodeStates.nodePosition.roll	Roll of the node in radians. If AGV/UAV is not concerned with roll, this value may be omitted.	New field	state.json	state.json	3D navigation	
+nodeStates.nodePosition.pitch	Pitch of the node in radians. If AGV/UAV is not concerned with pitch, this value may be omitted.	New field	state.json	state.json	3D navigation	
+edgeStates.trajectory.controlPoints.z	Optional z coordinate of the control point. If the AGV operates in a 2D plane, this value may be omitted.	New field	state.json	state.json	3D navigation	
+agvPosition.z	Z coordinate of the AGV/UAV position in meters above the map's defined zero level. May be omitted if the AGV/UAV operates in a 2D plane.	New field	state.json & velocity.json	state.json & velocity.json	3D navigation	
+agvPosition.roll	Roll of the AGV in radians. If AGV/UAV is not concerned with roll, this value may be omitted.	New field	state.json & velocity.json	state.json & velocity.json	3D navigation	
+agvPosition.pitch	Pitch of the AGV in radians. If AGV is not concerned with pitch, this value may be omitted.	New field	state.json & velocity.json	state.json & velocity.json	3D navigation	
+velocity.vz	The AVGs/UAVs velocity in its z direction. May be omitted if the vehicle operates in a 2D plane.	New field	state.json & velocity.json	state.json & velocity.json	3D navigation	
+velocity.pitchRate	The AVGs turning speed around its y axis. May be omitted if the vehicle is not concerned with pitch.	New field	state.json & velocity.json	state.json & velocity.json	3D navigation	
+velocity.rollRate	The AVGs turning speed around its x axis. May be omitted if the vehicle is not concerned with roll.	New field	state.json & velocity.json	state.json & velocity.json	3D navigation	
+actionStates.resultDescription	Description of the result, e.g., the result of a RFID-read. Errors will be transmitted in errors.	Type change	state.json	state.json	Complex return types	
+physicalParameters.depth	Inner depth of the elevator cabin	New field	factsheet.json	factsheet_elevator.json	Elevator control	
+physicalParameters.doorWidth	Width of the door frame when doors are fully opened.	New field	factsheet.json	factsheet_elevator.json	Elevator control	
+physicalParameters.doorHeight	Height of the elevator door frame.	New field	factsheet.json	factsheet_elevator.json	Elevator control	
+service.floors	List of floors that the elevator can serve.	New field	factsheet.json	factsheet_elevator.json	Elevator control	
+service.transitionTime	Describes how long the elevator approximately takes to move between two floors	New field	factsheet.json	factsheet_elevator.json	Elevator control	
+doorStatus.open	Indicates whether the elevator's doors are fully opened. Complements doorsOpening.	New field	state.json	elevator_state.json	Elevator control	
+doorStatus.openingInProgress	Indicates whether the elevator's doors are in the process of opening. Complements doorsOpen	New field	state.json	elevator_state.json	Elevator control	
+agvPosition	"Defines the position on a map
+in world coordinates."	Removed	state.json	elevator_state.json	Elevator control	This field includes parameters for continuous localization (e.g., x–y coordinates and rotation), which remain constant for elevators. Since elevators do not require dynamic localization and have no intermediate state while moving between floors, these fields are unnecessary.
+batteryState	"Contains all battery-related in-
+formation."	Removed	state.json	elevator_state.json	Elevator control	"Elevators are typically connected di-
+rectly to the power grid and do not
+rely on batteries for normal opera-
+tion. Battery-related metrics such as
+estimated reach are not meaningful
+and do not affect elevator operation."
+velocity	"The AGV’s velocity in vehicle
+coordinates."	Removed	state.json	elevator_state.json	Elevator control	"Elevators exhibit only vertical mo-
+tion and do not perform planar
+movement or rotation. Elevator mo-
+tion is controlled internally"
+loads 	"Loads currently handled by the
+AGV."	Removed	state.json	elevator_state.json	Elevator control	Elevators do not handle loads in the same manner as AGVs, which manage vehicle-mounted cargo. Load management is therefore outside the scope of elevator operations.
+safetyState.fieldViolation	"Describes whether a protective
+field has been violated"	Removed	state.json	elevator_state.json	Elevator control	Protective fields, as defined for AGVs, are not applicable to elevators because their operation is confined to controlled shafts and does not involve dynamic navigation.
+zoneSetId	"ID of the zone set used for path
+planning."	Removed	state.json	elevator_state.json	Elevator control	"Elevators do not perform free nav-
+igation and do not adhere to zone-
+based traffic control."
+nodeStates.nodePosition	"Defines the position of a node
+that must be traveled to fill an
+order in world coordinates"	Removed	state.json	elevator_state.json	Elevator control	"In the context of elevators, nodes
+represent more abstract floors with
+fixed, predefined locations. Because these locations are static and do not change, transmitting node position data in state messages is unnecessary."
+edgeStates.trajectory	"Defines the trajectory of an
+edge as a NURBS curve"	Removed	state.json	elevator_state.json	Elevator control	"Elevator movement follows a fixed
+vertical path and does not involve
+navigable trajectories or continuous
+path geometry."
+typeSpecification.agvKinematic	Describes the kinematic model of an AGV.	Removed	factsheet.json	factsheet_elevator.json	Elevator control	Elevators move only along a fixed vertical axis and do not have kinematics corresponding to mobile AGVs.
+typeSpecification.localizationTypes	Specifies localization methods used by an AGV.	Removed	factsheet.json	factsheet_elevator.json	Elevator control	Elevators do not perform localization and their position is managed by internal control systems.
+typeSpecification.navigationTypes	Specifies navigation strategies for AGVs.	Removed	factsheet.json	factsheet_elevator.json	Elevator control	Autonomous navigation is not applicable to elevators, as their movement is strictly controlled by internal elevator logic along predefined vertical paths.
+agvGeometry.wheelDefinitions	"List of AGVs wheels, containing wheel-arrangement and geometry &
+Elevators do not have wheel geometry"	Removed	factsheet.json	factsheet_elevator.json	Elevator control	Elevators do not have wheel geometry
+agvGeometry.envelopes3d	"AGV envelope curves in 3D which describe the dimensions of the AGV in
+different states (e.g. unloaded, loaded)"	Removed	factsheet.json	factsheet_elevator.json	Elevator control	"Elevators do not have varying, complex geometry which would require envelope
+curve representation"
+physicalParameters.accelerationMax	Maximum acceleration for an AGV	Removed	factsheet.json	factsheet_elevator.json	Elevator control	Elevator acceleration is managed internally by the elevator system, making external control unnecessary. Consequently, the master controller does not require this information.
+operatingMode 	"Current operating mode of the
+AGV."	"Removed SEMIAUTOMATIC,
+MANUAL and TEACHING.
+Redefined AUTOMATIC. Added
+DUAL and LOCAL CONTROL"	state.json	state_elevator.json	Elevator control	AGV operation modes such as SEMIAUTOMATIC, MANUAL, and TEACHING are not applicable to elevators due to fundamental differences in functionality.
+transitioning	"Indicates whether the AGV is
+driving or rotating"	Replaces  driving	state.json	elevator_state.json	Elevator control	Concepts such as rotation or driving are irrelevant for elevators, as their motion is restricted to vertical travel along a fixed path
+typeSpecification.elevatorClass	Classification of the elevator type (e.g., traction-based).	Replaces agvClass	factsheet.json	factsheet_elevator.json	Elevator control	
+typeSpecification.maxFloors	Maximum number of floors the elevator is capable of traveling as specified by manufacturer	Replaces agvGeometry.envelopes2d	factsheet.json	factsheet_elevator.json	Elevator control	
+elevatorGeometry.envelopes2d	Two-dimensional footprint of the cabin, used for non-rectangular elevators	Replaces agvGeometry.envelopes2d	factsheet.json	factsheet_elevator.json	Elevator control	
+physicalParameters.height	Inner height of the elevator cabin.	Replaces maxHeight and minHeight	factsheet.json	factsheet_elevator.json	Elevator control	
+physicalParameters.speed	Rated speed of the elevator in meters per second.	Replaces maxSpeed and minSpeed	factsheet.json	factsheet_elevator.json	Elevator control	
+newBaseRequest	"A field that the AGV can set
+to True to indicate that master
+control should send a new base
+path of nodes (See Section III).
+If no base is provided, the
+AGV reduces its speed"	"Semantic modification: when used
+by an elevator, setting this field to
+True indicates that the elevator re-
+quires a new base of floor nodes. Un-
+like AGVs, this flag does not imply
+deceleration"	state.json	elevator_state.json	Elevator control	The original semantics do not align with elevator behavior, as deceleration when approaching floors is predetermined and cannot be influenced by this flag.
