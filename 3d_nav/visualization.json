@@ -51,16 +51,19 @@
                     "type": "number"
                 },
                 "z": {
-                    "type": "number"
+                    "type": "number",
+                    "description": "Z coordinate of the AGV position in meters above the map's defined zero level. May be omitted if the AGV operates in a 2D plane."
                 },
                 "theta": {
                     "type": "number"
                 },
                 "roll": {
-                    "type": "number"
+                    "type": "number",
+                    "description":"Roll of the AGV in radians. If AGV is not concerned with roll, this value may be omitted."
                 },
                 "pitch": {
-                    "type": "number"
+                    "type": "number",
+                    "description":"Pitch of the AGV in radians. If AGV is not concerned with pitch, this value may be omitted."
                 },
                 "mapId": {
                     "type": "string"
@@ -96,16 +99,19 @@
                     "type": "number"
                 },
                 "vz": {
-                    "type": "number"
+                    "type": "number",
+                    "description": "The AGVs velocity in its z direction. May be omitted if the vehicle operates in a 2D plane."
                 },
                 "omega": {
                     "type": "number"
                 },
                 "pitchRate": {
-                    "type": "number"
+                    "type": "number",
+                    "description": "The AVGs turning speed around its y axis. May be omitted if the vehicle is not concerned with pitch."
                 },
                 "rollRate": {
-                    "type": "number"
+                    "type": "number",
+                    "description": "The AVGs turning speed around its x axis. May be omitted if the vehicle is not concerned with roll."
                 }
             }
         }
