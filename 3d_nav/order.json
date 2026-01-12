@@ -329,6 +329,16 @@
                                 "description":"Defines the width of the corridor in meters to the right related to the trajectory of the vehicle.",
                                 "minimum": 0.0
                             },
+                            "upperHeight": {
+                                  "type": "number",
+                                  "description": "Vertical clearance above the trajectory in meters.",
+                                  "minimum": 0.0
+                            },
+                            "lowerHeight": {
+                              "type": "number",
+                              "description": "Vertical clearance below the trajectory in meters.",
+                              "minimum": 0.0
+                            },
                             "corridorRefPoint": {
                                 "type": "string",
                                 "description": "Defines whether the boundaries are valid for the kinematic center or the contour of the vehicle.",
