@@ -20,7 +20,8 @@
     "actionStates",
     "operatingMode",
     "errors",
-    "safetyState"
+    "safetyState",
+    "doorStatus"
   ],
   "properties": {
     "headerId": {
@@ -50,7 +51,7 @@
       "type": "string",
       "description": "Serial number of the elevator."
     },
-    "maps":{
+    "maps": {
       "type": "array",
       "description": "Array of map-objects that are currently stored on the vehicle.",
       "items": {
@@ -256,11 +257,11 @@
               "properties": {
                 "referenceKey": {
                   "type": "string",
-                  "description":"Specifies the type of reference used (e.g. nodeId, edgeId, orderId, actionId, etc.)."
+                  "description": "Specifies the type of reference used (e.g. nodeId, edgeId, orderId, actionId, etc.)."
                 },
                 "referenceValue": {
                   "type": "string",
-                  "description":"The value that belongs to the reference key. For example, the id of the node where the error occurred."
+                  "description": "The value that belongs to the reference key. For example, the id of the node where the error occurred."
                 }
               },
               "required": [
@@ -315,11 +316,11 @@
               "properties": {
                 "referenceKey": {
                   "type": "string",
-                  "description":"References the type of reference (e.g., headerId, orderId, actionId, etc.)."
+                  "description": "References the type of reference (e.g., headerId, orderId, actionId, etc.)."
                 },
                 "referenceValue": {
                   "type": "string",
-                  "description":"References the value, which belongs to the reference key."
+                  "description": "References the value, which belongs to the reference key."
                 }
               }
             }
@@ -356,8 +357,24 @@
             "NONE"
           ]
         }
-        
       }
+    },
+    "doorStatus": {
+      "type": "object",
+      "properties": {
+        "openingInProgress": {
+          "type": "boolean",
+          "description": "Indicates whether the elevator's doors are fully opened. Complements doorsOpening. "
+        },
+        "open": {
+          "type": "boolean",
+          "description": "Indicates whether the elevator's doors are fully opened. Complements doorsOpening."
+        }
+      },
+      "required": [
+        "openingInProgress",
+        "open"
+      ]
     }
   }
 }
