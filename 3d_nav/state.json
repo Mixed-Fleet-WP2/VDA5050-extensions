@@ -177,16 +177,19 @@
                                 "type": "number"
                             },
                             "z": {
-                                "type": "number"
+                                "type": "number",
+                                "description": "Optional z coordinate of the node. If the AGV operates in a 2D plane, this value may be omitted."
                             },
                             "theta": {
                                 "type": "number"
                             },
                             "roll": {
-                                "type": "number"
+                                "type": "number",
+                                "description":"Roll of the node in radians. If AGV is not concerned with roll, this value may be omitted."
                             },
                             "pitch": {
-                                "type": "number"
+                                "type": "number",
+                                "description":"Pitch of the node in radians. If AGV is not concerned with pitch, this value may be omitted."
                             },
                             "mapId": {
                                 "type": "string"
@@ -261,6 +264,10 @@
                                         "y": {
                                             "type": "number"
                                         },
+                                        "z": {
+                                            "type": "number",
+                                            "description": "Optional z coordinate of the control point. If the AGV operates in a 2D plane, this value may be omitted."
+                                        },
                                         "weight": {
                                             "type": "number",
                                             "description": "The weight, with which this control point pulls on the curve.\nWhen not defined, the default will be 1.0."
@@ -291,16 +298,19 @@
                     "type": "number"
                 },
                 "z": {
-                    "type": "number"
+                    "type": "number",
+                    "description": "Z coordinate of the AGV position in meters above the map's defined zero level. May be omitted if the AGV operates in a 2D plane."
                 },
                 "theta": {
                     "type": "number"
                 },
                 "roll": {
-                    "type": "number"
+                    "type": "number",
+                    "description":"Roll of the AGV in radians. If AGV is not concerned with roll, this value may be omitted."
                 },
                 "pitch": {
-                    "type": "number"
+                    "type": "number",
+                    "description":"Pitch of the AGV in radians. If AGV is not concerned with pitch, this value may be omitted."
                 },
                 "mapId": {
                     "type": "string"
@@ -330,7 +340,7 @@
             "properties": {
                 "vx": {
                     "type": "number",
-                    "description":"The AVGs velocity in its x direction"
+                    "description":"The AVGs velocity in its x direction."
                 },
                 "vy": {
                     "type": "number",
@@ -338,7 +348,7 @@
                 },
                 "vz": {
                     "type": "number",
-                    "description":"The AVGs velocity in its z direction"
+                    "description":"The AVGs velocity in its z direction. May be omitted if the vehicle operates in a 2D plane."
                 },
                 "omega": {
                     "type": "number",
@@ -346,11 +356,11 @@
                 },
                 "pitchRate": {
                     "type": "number",
-                    "description":"The AVGs turning speed around its y axis."
+                    "description":"The AVGs turning speed around its y axis. May be omitted if the vehicle is not concerned with pitch."
                 },
                 "rollRate": {
                     "type": "number",
-                    "description":"The AVGs turning speed around its x axis."
+                    "description":"The AVGs turning speed around its x axis. May be omitted if the vehicle is not concerned with roll."
                 }
             }
         },
