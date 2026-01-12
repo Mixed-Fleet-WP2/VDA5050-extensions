@@ -293,6 +293,10 @@
                                             "type": "number",
                                             "description": "Y coordinate described in the world coordinate system."
                                         },
+                                        "z": { 
+                                            "type": "number", 
+                                            "description": "Z coordinate described in the world coordinate system." 
+                                        },
                                         "weight": {
                                             "type": "number",
                                             "minimum": 0,
