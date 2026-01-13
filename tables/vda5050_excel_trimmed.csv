@@ -43,37 +43,25 @@ service.type,Describes the intended use of the elevator,New field,factsheet.json
 service.elevatorUsage,Describes who is allowed to used the elevator,New field,factsheet.json,factsheet_elevator.json,Elevator control,
 doorStatus.rearDoorOpeningInProgress,Indicates whether the elevator's rear doors are in the process of opening or closing. Optional if elevator has only one door.,New field,state.json,elevator_state.json,Elevator control,
 agvPosition,"Defines the position on a map
-in world coordinates.",Removed,state.json,elevator_state.json,Elevator control,"This field includes parameters for continuous localization (e.g., x & y coordinates and rotation), which remain constant for elevators. Since elevators do not require dynamic localization and have no intermediate state while moving between floors, these fields are unnecessary."
+in world coordinates.",Removed,state.json,elevator_state.json,Elevator control,"This field includes parameters for continuous localization (e.g., x and y coordinates and rotation), which remain constant for elevators. Since elevators do not require dynamic localization and have no intermediate state while moving between floors, these fields are unnecessary."
 batteryState,"Contains all battery-related in-
-formation.",Removed,state.json,elevator_state.json,Elevator control,"Elevators are typically connected di-
-rectly to the power grid and do not
-rely on batteries for normal opera-
-tion. Battery-related metrics such as
-estimated reach are not meaningful
-and do not affect elevator operation."
+formation.",Removed,state.json,elevator_state.json,Elevator control,Elevators are typically connected directly to the power grid and do not rely on batteries for normal operation. Battery-related metrics such as estimated reach are not meaningful and do not affect elevator operation.
 velocity,"The AGVs velocity in vehicle
-coordinates.",Removed,state.json,elevator_state.json,Elevator control,"Elevators exhibit only vertical mo-
-tion and do not perform planar
-movement or rotation. Elevator mo-
-tion is controlled internally"
+coordinates.",Removed,state.json,elevator_state.json,Elevator control,"Elevators exhibit only vertical motion and do not perform planar
+movement or rotation. Elevator motion is controlled internally"
 loads ,"Loads currently handled by the
 AGV.",Removed,state.json,elevator_state.json,Elevator control,"Elevators do not handle loads in the same manner as AGVs, which manage vehicle-mounted cargo. Load management is therefore outside the scope of elevator operations."
 safetyState.fieldViolation,"Describes whether a protective
 field has been violated",Removed,state.json,elevator_state.json,Elevator control,"Protective fields, as defined for AGVs, are not applicable to elevators because their operation is confined to controlled shafts and does not involve dynamic navigation."
 zoneSetId,"ID of the zone set used for path
-planning.",Removed,state.json,elevator_state.json,Elevator control,"Elevators do not perform free nav-
-igation and do not adhere to zone-
-based traffic control."
+planning.",Removed,state.json,elevator_state.json,Elevator control,Elevators do not perform free navigation and do not adhere to zone-based traffic control.
 nodeStates.nodePosition,"Defines the position of a node
 that must be traveled to fill an
 order in world coordinates",Removed,state.json,elevator_state.json,Elevator control,"In the context of elevators, nodes
 represent more abstract floors with
 fixed, predefined locations. Because these locations are static and do not change, transmitting node position data in state messages is unnecessary."
 edgeStates.trajectory,"Defines the trajectory of an
-edge as a NURBS curve",Removed,state.json,elevator_state.json,Elevator control,"Elevator movement follows a fixed
-vertical path and does not involve
-navigable trajectories or continuous
-path geometry."
+edge as a NURBS curve",Removed,state.json,elevator_state.json,Elevator control,Elevator movement follows a fixed vertical path and does not involve navigable trajectories or continuous path geometry.
 typeSpecification.agvKinematic,Describes the kinematic model of an AGV.,Removed,factsheet.json,factsheet_elevator.json,Elevator control,Elevators move only along a fixed vertical axis and do not have kinematics corresponding to mobile AGVs.
 typeSpecification.localizationTypes,Specifies localization methods used by an AGV.,Removed,factsheet.json,factsheet_elevator.json,Elevator control,Elevators do not perform localization and their position is managed by internal control systems.
 typeSpecification.navigationTypes,Specifies navigation strategies for AGVs.,Removed,factsheet.json,factsheet_elevator.json,Elevator control,"Autonomous navigation is not applicable to elevators, as their movement is strictly controlled by internal elevator logic along predefined vertical paths."
