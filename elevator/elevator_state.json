@@ -362,13 +362,21 @@
     "doorStatus": {
       "type": "object",
       "properties": {
+        "rearDoorOpeningInProgress": {
+          "type": "boolean",
+          "description": "Indicates whether the elevator's rear doors are in the process of opening or closing. Optional if elevator has only one door."
+        },
+        "rearDoorOpen": {
+          "type": "boolean",
+          "description": "Indicates whether the elevator's rear doors are fully opened. Optional if elevator has only one door."
+        },
         "openingInProgress": {
           "type": "boolean",
-          "description": "Indicates whether the elevator's doors are fully opened. Complements doorsOpening. "
-        },
+          "description": "Indicates whether the elevator's main doors are in the process of opening or closing."
+      },
         "open": {
           "type": "boolean",
-          "description": "Indicates whether the elevator's doors are fully opened. Complements doorsOpening."
+          "description": "Indicates whether the elevator's main doors are fully opened."
         }
       },
       "required": [
