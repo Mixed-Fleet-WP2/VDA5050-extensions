@@ -125,7 +125,8 @@
         "AUTOMATIC",
         "SERVICE",
         "LOCAL_CONTROL",
-        "DUAL"
+        "DUAL",
+        "EMERGENCY"
       ]
     },
     "nodeStates": {
