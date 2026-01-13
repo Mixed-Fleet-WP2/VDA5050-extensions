@@ -10,11 +10,11 @@ considered as positioned on the node.",New field,order.json,order.json,3D naviga
 nodes.nodePosition.allowedDeviationZ,"Indicates how exact an AGV/UAV has to pass over a node in reference to
 the z-axis for it to count as traversed",New field,order.json,order.json,3D navigation,
 nodes.nodePosition.allowedDeviationRoll ,"Indicates how big the deviation of roll angle of the vehicle can from the
-node’s roll angle while still counting the node as traversed by the vehicle",New field,order.json,order.json,3D navigation,
+Nodeâ€™s roll angle while still counting the node as traversed by the vehicle",New field,order.json,order.json,3D navigation,
 nodes.nodePosition.allowedDeviationPitch,"Indicates how big the deviation of pitch angle of the vehicle can from the
-node’s pitch angle while still counting the node as traversed by the vehicle",New field,order.json,order.json,3D navigation,
+Nodeâ€™s pitch angle while still counting the node as traversed by the vehicle",New field,order.json,order.json,3D navigation,
 edges.trajectory.controlPoints.z ,"Describes the z-coordinate of a control point that describes the NURBS-
-curve depicting and edge’s trajectory",New field,order.json,order.json,3D navigation,
+curve depicting and edgeâ€™s trajectory",New field,order.json,order.json,3D navigation,
 edges.corridor.upperHeight,"Defines the upper height (calculating from corridor reference point) of the
 corridor in meters related to the trajectory of the vehicle. Corridor specifies
 how much the vehicle is allowed to deviate from a given trajectory.",New field,order.json,order.json,3D navigation,
@@ -43,7 +43,7 @@ service.type,Describes the intended use of the elevator,New field,factsheet.json
 service.elevatorUsage,Describes who is allowed to used the elevator,New field,factsheet.json,factsheet_elevator.json,Elevator control,
 doorStatus.rearDoorOpeningInProgress,Indicates whether the elevator's rear doors are in the process of opening or closing. Optional if elevator has only one door.,New field,state.json,elevator_state.json,Elevator control,
 agvPosition,"Defines the position on a map
-in world coordinates.",Removed,state.json,elevator_state.json,Elevator control,"This field includes parameters for continuous localization (e.g., x–y coordinates and rotation), which remain constant for elevators. Since elevators do not require dynamic localization and have no intermediate state while moving between floors, these fields are unnecessary."
+in world coordinates.",Removed,state.json,elevator_state.json,Elevator control,"This field includes parameters for continuous localization (e.g., x & y coordinates and rotation), which remain constant for elevators. Since elevators do not require dynamic localization and have no intermediate state while moving between floors, these fields are unnecessary."
 batteryState,"Contains all battery-related in-
 formation.",Removed,state.json,elevator_state.json,Elevator control,"Elevators are typically connected di-
 rectly to the power grid and do not
@@ -51,7 +51,7 @@ rely on batteries for normal opera-
 tion. Battery-related metrics such as
 estimated reach are not meaningful
 and do not affect elevator operation."
-velocity,"The AGV’s velocity in vehicle
+velocity,"The AGVs velocity in vehicle
 coordinates.",Removed,state.json,elevator_state.json,Elevator control,"Elevators exhibit only vertical mo-
 tion and do not perform planar
 movement or rotation. Elevator mo-
