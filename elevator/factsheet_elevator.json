@@ -498,15 +498,16 @@
             "default": "GENERAL"
           }
         },
-        "agvOnly": {
-          "type": "boolean",
-          "description": "whether the elevator is only used by AGVs or also by people"
-        }
+        "elevatorUsage": {
+          "type": "string",
+          "enum": ["HUMAN_ONLY", "BOTH", "ROBOT_ONLY"],
+          "description": "Who is allowed to use the elevator"
+      }
       },
       "required": [
         "floors",
         "type",
-        "agvOnly"
+        "elevatorUsage"
       ]
     },
     "elevatorGeometry": {
