@@ -38,7 +38,7 @@ service.transitionTime,Describes how long the elevator approximately takes to mo
 doorStatus.open,Indicates whether the elevator's doors are fully opened. Complements doorsOpening.,New field,state.json,elevator_state.json,Elevator control,
 doorStatus.openingInProgress,Indicates whether the elevator's doors are in the process of opening. Complements doorsOpen,New field,state.json,elevator_state.json,Elevator control,
 doorStatus.rearDoorOpen,Indicates that the rear door is open,New field,state.json,elevator_state.json,Elevator control,
-service.type,Describes the intended use of the elevator,New field,factsheet.json,elevator_factsheet.json,Elevator control,
+service.type,Context of use for the elevator e.g. EMERGENCY,New field,factsheet.json,elevator_factsheet.json,Elevator control,
 service.elevatorUsage,Describes who is allowed to used the elevator,New field,factsheet.json,elevator_factsheet.json,Elevator control,
 doorStatus.rearDoorOpeningInProgress,Indicates whether the elevator's rear doors are in the process of opening or closing. Optional if elevator has only one door.,New field,state.json,elevator_state.json,Elevator control,
 agvPosition,"Defines the position on a map
