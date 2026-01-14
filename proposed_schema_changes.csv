@@ -71,11 +71,11 @@ different states (e.g. unloaded, loaded)",Removed,factsheet.json,elevator_factsh
 curve representation"
 physicalParameters.accelerationMax,Maximum acceleration for an AGV,Removed,factsheet.json,elevator_factsheet.json,Elevator control,"Elevator acceleration is managed internally by the elevator system, making external control unnecessary. Consequently, the master controller does not require this information."
 operatingMode ,"Current operating mode of the
-AGV.","Removed SEMIAUTOMATIC,
+AGV. Explanations may be found from elevator_state.json","Removed SEMIAUTOMATIC,
 MANUAL and TEACHING.
 Redefined AUTOMATIC. Added
 DUAL and LOCAL CONTROL",state.json,elevator_state.json,Elevator control,"AGV operation modes such as SEMIAUTOMATIC, MANUAL, and TEACHING are not applicable to elevators due to fundamental differences in functionality."
-protocolFeatures.peripheralActions,Actions that the elevator exposes,Renamed from agvActions,factsheet.json,elevator_factsheet.json,Elevator control,
+protocolFeatures.peripheralActions,Actions that the elevator exposes (including those defined by VDA5050 and custom actions),Renamed from agvActions,factsheet.json,elevator_factsheet.json,Elevator control,
 transitioning,"Indicates whether the AGV is
 driving or rotating",Replaces  driving,state.json,elevator_state.json,Elevator control,"Concepts such as rotation or driving are irrelevant for elevators, as their motion is restricted to vertical travel along a fixed path"
 typeSpecification.elevatorClass,"Classification of the elevator type (e.g., traction-based).",Replaces agvClass,factsheet.json,elevator_factsheet.json,Elevator control,
