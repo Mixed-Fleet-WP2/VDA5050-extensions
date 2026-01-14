@@ -125,7 +125,7 @@
         },
         "doorWidth": {
           "type": "number",
-          "description": "width of the elevator's door frame when doors are fully",
+          "description": "width of the elevator's door frame when doors are fully opened",
           "unit": "m"
         },
         "doorHeight": {

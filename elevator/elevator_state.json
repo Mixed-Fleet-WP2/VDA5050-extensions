@@ -120,7 +120,7 @@
     },
     "operatingMode": {
       "type": "string",
-      "description": "Current operating mode of the elevator.",
+      "description": "Current operating mode of the elevator. AUTOMATIC: normal operation under control of the master control SERVICE: elevator is operating in service mode, e.g., for maintenance LOCAL_CONTROL: elevator is operated locally at the vehicle DUAL: elevator can be operated both automatically and locally EMERGENCY: elevator is operating in emergency mode, e.g., fire service mode",
       "enum": [
         "AUTOMATIC",
         "SERVICE",

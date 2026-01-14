@@ -74,7 +74,7 @@ operatingMode ,"Current operating mode of the
 AGV.","Removed SEMIAUTOMATIC,
 MANUAL and TEACHING.
 Redefined AUTOMATIC. Added
-DUAL and LOCAL CONTROL",state.json,state_elevator.json,Elevator control,"AGV operation modes such as SEMIAUTOMATIC, MANUAL, and TEACHING are not applicable to elevators due to fundamental differences in functionality."
+DUAL and LOCAL CONTROL",state.json,elevator_state.json,Elevator control,"AGV operation modes such as SEMIAUTOMATIC, MANUAL, and TEACHING are not applicable to elevators due to fundamental differences in functionality."
 protocolFeatures.peripheralActions,Actions that the elevator exposes,Renamed from agvActions,factsheet.json,elevator_factsheet.json,Elevator control,
 transitioning,"Indicates whether the AGV is
 driving or rotating",Replaces  driving,state.json,elevator_state.json,Elevator control,"Concepts such as rotation or driving are irrelevant for elevators, as their motion is restricted to vertical travel along a fixed path"
