@@ -9,7 +9,7 @@ This repository provides the proposed JSON schemas and a summary table detailing
     - __Basis schema__: Name of the original VDA5050 schema which served as the basis for changes. These may be found in the _original_ directory in this repository or from the [VDA5050 repository](https://github.com/VDA5050/VDA5050/tree/release/2.1.0)
     - __New schema__: Name of the new schema that is the result of changes to the __Basis schema__. If the field values are the same, the changes are proposed to be made to the original schema directly.
     - __Related feature__: Describes a feature that the field change relates to. See the related paper for details.
-    - __Rational__: For removed fields, contains a brief explanation for why the field was removed as part of the study's results
+    - __Rationale__: For removed fields, contains a brief explanation for why the field was removed as part of the study's results
 
 - __complex_return_types__/: JSON chemas related to section 5B.2 _Supporting three-dimensional navigation_
 - __3d_nav__/: JSON chemas related to section 5B.1 _Extending action result representations_
