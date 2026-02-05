@@ -93,9 +93,11 @@
         "width",
         "length",
         "doorWidth",
+        "doorHeight",
         "height",
         "decelerationMax",
-        "accelerationMax"
+        "accelerationMax",
+        "speedMax"
       ],
       "properties": {
         "accelerationMax": {
@@ -132,7 +134,11 @@
           "type": "number",
           "description": "height of the elevator door frame",
           "unit": "m"
-        }
+        },
+        "speedMax": {
+          "type": "number",
+          "description": "Maximum speed of the elevator specified by manufacturer",
+          "unit": "m/s"
       }
     },
     "protocolLimits": {
@@ -403,6 +409,7 @@
               }
             }
           }
+        }
         }
       }
     },

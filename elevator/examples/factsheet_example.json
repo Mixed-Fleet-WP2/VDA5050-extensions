@@ -1,0 +1,71 @@
+{
+  "headerId": 1,
+  "timestamp": "2025-03-11T10:15:30.00Z",
+  "version": "1.3.2",
+  "manufacturer": "Example Elevators Inc.",
+  "serialNumber": "ELV-001",
+  "typeSpecification": {
+    "seriesName": "ElevatorPro 5000",
+    "seriesDescription": "High-capacity traction elevator suitable for industrial applications.",
+    "maxLoadMass": 5000,
+    "elevatorClass": "TRACTION",
+    "maxTravel": 40,
+    "maxFloors": 12
+  },
+  "physicalParameters": {
+    "width": 1.6,
+    "length": 1.8,
+    "height": 2.3,
+    "doorWidth": 0.9,
+    "doorHeight": 2.1,
+    "accelerationMax": 1.0,
+    "decelerationMax": 1.2,
+    "speedMax": 1.6
+  },
+  "protocolLimits": {
+    "maxStringLens": {
+      "msgLen": 65535,
+      "topicSerialLen": 64,
+      "topicElemLen": 64,
+      "idLen": 36,
+      "idNumericalOnly": false,
+      "enumLen": 32,
+      "loadIdLen": 36
+    },
+    "maxArrayLens": {
+      "order.nodes": 50,
+      "order.edges": 50,
+      "node.actions": 10,
+      "edge.actions": 10,
+      "actions.actionsParameters": 10,
+      "instantActions": 5,
+      "state.nodeStates": 50,
+      "state.edgeStates": 50,
+      "state.actionStates": 20,
+      "state.errors": 10,
+      "state.information": 10
+    },
+    "timing": {
+      "minOrderInterval": 0.5,
+      "minStateInterval": 0.5,
+      "defaultStateInterval": 1.0,
+      "visualizationInterval": 1.0
+    }
+  },
+  "protocolFeatures": {
+    "optionalParameters": [],
+    "peripheralActions": [
+      {
+        "actionType": "OPEN_DOOR",
+        "actionDescription": "Opens the elevator cabin doors",
+        "actionScopes": ["NODE", "INSTANT"],
+        "blockingTypes": ["SOFT"]
+      }
+    ]
+  },
+  "service": {
+    "floors": ["B1", "G", "1", "2", "3", "4", "5"],
+    "type": ["GENERAL", "EMERGENCY"],
+    "elevatorUsage": "BOTH"
+  }
+}

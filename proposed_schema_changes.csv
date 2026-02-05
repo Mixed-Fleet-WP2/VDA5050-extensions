@@ -80,9 +80,9 @@ transitioning,"Indicates whether the AGV is
 driving or rotating",Replaces  driving,state.json,elevator_state.json,Elevator control,"Concepts such as rotation or driving are irrelevant for elevators, as their motion is restricted to vertical travel along a fixed path"
 typeSpecification.elevatorClass,"Classification of the elevator type (e.g., traction-based).",Replaces agvClass,factsheet.json,elevator_factsheet.json,Elevator control,
 typeSpecification.maxFloors,Maximum number of floors the elevator is capable of traveling as specified by manufacturer,Replaces agvGeometry.envelopes2d,factsheet.json,elevator_factsheet.json,Elevator control,
+physicalParameters.speedMin,Minimal controlled continuous speed of the AGV,Removed,factsheet.json,elevator_factsheet.json,Elevator control,"Elevators don’t operate at continuous low speeds: they only accelerate, cruise, and stop. Since an elevator never needs to “drive slowly” like an AGV, this parameter isn’t relevant to elevator operation."
 elevatorGeometry.envelopes2d,Two-dimensional footprint of the cabin.,Replaces agvGeometry.envelopes2d,factsheet.json,elevator_factsheet.json,Elevator control,
 physicalParameters.height,Inner height of the elevator cabin.,Replaces maxHeight and minHeight,factsheet.json,elevator_factsheet.json,Elevator control,Elevator cabin height is uniform and the two fields may be joined together
-physicalParameters.speed,Rated speed of the elevator in meters per second.,Replaces maxSpeed and minSpeed,factsheet.json,elevator_factsheet.json,Elevator control,Elevators have fixed speed limits set by the the internal controller and they are not controllable by the master controller.
 newBaseRequest,"A field that the AGV can set
 to True to indicate that master
 control should send a new base

@@ -2,7 +2,7 @@
   "headerId": 314,
   "timestamp": "2025-03-11T10:16:05.00Z",
   "version": "1.3.2",
-  "manufacturer": "KONE",
+  "manufacturer": "Example Elevators Inc.",
   "serialNumber": "ELV-001",
 
   "orderId": "order-12345",
