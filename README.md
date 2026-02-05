@@ -11,7 +11,7 @@ This repository provides the proposed JSON schemas and a summary table detailing
     - __Related feature__: Describes a feature that the field change relates to. See the related paper for details.
     - __Rationale__: For removed fields, contains a brief explanation for why the field was removed as part of the study's results
 
-- __complex_return_types__/: JSON chemas related to section 5B.2 _Supporting three-dimensional navigation_
-- __3d_nav__/: JSON chemas related to section 5B.1 _Extending action result representations_
-- __elevator__/: JSON chemas related to section 5B.3 _Elevator communication_
+- __complex_return_types__/: JSON chemas related to section 5.2.2 _Supporting three-dimensional navigation_
+- __3d_nav__/: JSON chemas related to section 5.2.1 _Extending action result representations_
+- __elevator__/: JSON chemas related to section 5.2.3 _Elevator communication_
 - __original__/: Contains copies of the original VDA5050 schemas (v.2.1.0) copied from the official VDA5050 repository. This aims to make comparison of the changes easier
