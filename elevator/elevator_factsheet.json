@@ -51,7 +51,9 @@
          "required":[
             "seriesName",
             "maxLoadMass",
-            "elevatorClass"
+            "elevatorClass",
+            "maxFloors",
+            "maxTravel"
          ],
          "properties":{
             "seriesName":{
@@ -73,7 +75,7 @@
                "description":"Classification of the elevator type (e.g., traction-based)",
                "enum":[
                   "TRACTION",
-                  "HYDRAYLIC"
+                  "HYDRAULIC"
                ]
             },
             "maxTravel":{
