@@ -89,10 +89,9 @@ path of nodes (See Section III).
 If no base is provided, the
 AGV reduces its speed","Semantic modification: when used
 by an elevator, setting this field to
-True indicates that the elevator re-
-quires a new base of floor nodes. Un-
-like AGVs, this flag does not imply
+True indicates that the elevator requires a new base of floor nodes. Unlike AGVs, this flag does not imply
 deceleration",state.json,elevator_state.json,Elevator control,"The original semantics do not align with elevator behavior, as deceleration when approaching floors is predetermined and cannot be influenced by this flag."
+
 
 
 
