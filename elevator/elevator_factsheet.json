@@ -483,6 +483,12 @@
       },
       "service":{
          "type":"object",
+         "required":[
+            "floors",
+            "usageContext",
+            "elevatorUsage",
+            "transitionTime"
+         ],
          "description":"description of the services provided by the elevator",
          "properties":{
             "floors":{
@@ -534,12 +540,7 @@
                ],
                "description":"Who is allowed to use the elevator"
             }
-         },
-         "required":[
-            "floors",
-            "usageContext",
-            "elevatorUsage"
-         ]
+         }
       },
       "elevatorGeometry":{
          "type":"object",
