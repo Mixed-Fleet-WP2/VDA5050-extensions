@@ -10,9 +10,9 @@ considered as positioned on the node.",New field,order.json,order.json,3D naviga
 nodes.nodePosition.allowedDeviationZ,"Indicates how exact an AGV/UAV has to pass over a node in reference to
 the z-axis for it to count as traversed",New field,order.json,order.json,3D navigation,
 nodes.nodePosition.allowedDeviationRoll ,"Indicates how big the deviation of roll angle of the vehicle can from the
-Node’s roll angle while still counting the node as traversed by the vehicle",New field,order.json,order.json,3D navigation,
+node’s roll angle while still counting the node as traversed by the vehicle",New field,order.json,order.json,3D navigation,
 nodes.nodePosition.allowedDeviationPitch,"Indicates how big the deviation of pitch angle of the vehicle can from the
-Node’s pitch angle while still counting the node as traversed by the vehicle",New field,order.json,order.json,3D navigation,
+node’s pitch angle while still counting the node as traversed by the vehicle",New field,order.json,order.json,3D navigation,
 edges.trajectory.controlPoints.z ,"Describes the z-coordinate of a control point that describes the NURBS-
 curve depicting and edge’s trajectory",New field,order.json,order.json,3D navigation,
 edges.corridor.upperHeight,"Defines the upper height (calculating from corridor reference point) of the
@@ -94,3 +94,4 @@ True indicates that the elevator re-
 quires a new base of floor nodes. Un-
 like AGVs, this flag does not imply
 deceleration",state.json,elevator_state.json,Elevator control,"The original semantics do not align with elevator behavior, as deceleration when approaching floors is predetermined and cannot be influenced by this flag."
+
