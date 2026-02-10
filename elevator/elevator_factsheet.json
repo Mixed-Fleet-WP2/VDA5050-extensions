@@ -492,6 +492,26 @@
             "type": "string"
           }
         },
+        "transitionTime": {
+            "oneOf": [
+              {
+                "type": "number",
+                "description": "Constant time in seconds to travel between any two floors. Used if travel between floors takes same amount of time."
+              },
+            {
+              "type": "object",
+              "description": "Time in seconds for the elevator to move between specific floors.",
+              "additionalProperties": {
+                "type": "object",
+                "description": "Mapping from destination floor to travel time in seconds",
+                "additionalProperties": {
+                  "type": "number",
+                  "description": "Time in seconds to travel from the source floor to the target floor"
+                }
+              }
+            }
+          ]
+        },
         "type": {
           "type": "array",
           "description": "context of use for the elevator",
