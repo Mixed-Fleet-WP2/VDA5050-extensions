@@ -1,591 +1,595 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Elevator Factsheet",
-  "description": "The factsheet provides basic information about a specific elevator type series. This information allows comparison of different elevator types and can be applied for the planning, dimensioning and simulation of an elevator system. The factsheet also includes information about elevator communication interfaces which are required for the integration of an elevator type series into a VD[M]A-5050-compliant master control.",
-  "required": [
-    "headerId",
-    "timestamp",
-    "version",
-    "manufacturer",
-    "serialNumber",
-    "typeSpecification",
-    "physicalParameters",
-    "protocolLimits",
-    "protocolFeatures",
-    "service"
-  ],
-  "subtopic": "/factsheet",
-  "type": "object",
-  "properties": {
-    "headerId": {
-      "type": "integer",
-      "description": "header ID of the message. The headerId is defined per topic and incremented by 1 with each sent (but not necessarily received) message.",
-      "minimum": 0
-    },
-    "timestamp": {
-      "type": "string",
-      "format": "date-time",
-      "description": "Timestamp in ISO8601 format (YYYY-MM-DDTHH:mm:ss.ffZ).",
-      "examples": [
-        "1991-03-11T11:40:03.12Z"
-      ]
-    },
-    "version": {
-      "type": "string",
-      "description": "Version of the VD[M]A-5050 protocol [Major].[Minor].[Patch] (e.g. 1.3.2)",
-      "examples": [
-        "2.0.0"
-      ]
-    },
-    "manufacturer": {
-      "type": "string",
-      "description": "Manufacturer of the elevator"
-    },
-    "serialNumber": {
-      "type": "string",
-      "description": "Serial number of the elevator"
-    },
-    "typeSpecification": {
-      "type": "object",
-      "description": "These parameters generally specify the class and the capabilities of the elevator",
-      "required": [
-        "seriesName",
-        "maxLoadMass",
-        "elevatorClass"
-      ],
-      "properties": {
-        "seriesName": {
-          "type": "string",
-          "description": "Free text generalized series name as specified by manufacturer"
-        },
-        "seriesDescription": {
-          "type": "string",
-          "description": "Free text human readable description of the elevator type series"
-        },
-        "maxLoadMass": {
-          "type": "number",
-          "description": "maximum loadable mass",
-          "unit": "kg",
-          "minimum": 0
-        },
-        "elevatorClass": {
-          "type": "string",
-          "description": "Classification of the elevator type (e.g., traction-based)",
-          "enum": [
-            "TRACTION",
-            "HYDRAYLIC"
-          ]
-        },
-        "maxTravel": {
-          "type": "number",
-          "description": "Maximum travel distance of the elevator in meters specified by manufacture"
-        },
-        "maxFloors": {
-          "type": "number",
-          "description": "maximum number of floors the elevator is capable of traveling specified by manufacturer"
-        }
-      }
-    },
-    "physicalParameters": {
-      "type": "object",
-      "description": "These parameters specify the basic physical properties of the elevator",
-      "required": [
-        "width",
-        "length",
-        "doorWidth",
-        "doorHeight",
-        "height",
-        "decelerationMax",
-        "accelerationMax",
-        "speedMax"
-      ],
-      "properties": {
-        "accelerationMax": {
-          "type": "number",
-          "description": "maximum acceleration with maximum load",
-          "unit": "m/s^2"
-        },
-        "decelerationMax": {
-          "type": "number",
-          "description": "maximum deceleration with maximum load",
-          "unit": "m/s^2"
-        },
-        "width": {
-          "type": "number",
-          "description": "height of the elevator",
-          "unit": "m"
-        },
-        "length": {
-          "type": "number",
-          "description": "length of the elevator",
-          "unit": "m"
-        },
-        "height": {
-          "type": "number",
-          "description": "inner height of the elevator cabin",
-          "unit": "m"
-        },
-        "doorWidth": {
-          "type": "number",
-          "description": "width of the elevator's door frame when doors are fully opened",
-          "unit": "m"
-        },
-        "doorHeight": {
-          "type": "number",
-          "description": "height of the elevator door frame",
-          "unit": "m"
-        },
-        "speedMax": {
-          "type": "number",
-          "description": "Maximum speed of the elevator specified by manufacturer",
-          "unit": "m/s"
-      }
-    },
-    "protocolLimits": {
-      "type": "object",
-      "required": [
-        "maxStringLens",
-        "maxArrayLens",
-        "timing"
-      ],
-      "description": "This JSON-object describes the protocol limitations of the elevator. If a parameter is not defined or set to zero then there is no explicit limit for this parameter.",
-      "properties": {
-        "maxStringLens": {
-          "type": "object",
-          "description": "maximum lengths of strings",
-          "properties": {
-            "msgLen": {
-              "type": "integer",
-              "description": "maximum MQTT Message length"
-            },
-            "topicSerialLen": {
-              "type": "integer",
-              "description": "maximum length of serial-number part in MQTT-topics. Affected Parameters: order.serialNumber, instantActions.serialNumber, state.SerialNumber, visualization.serialNumber, connection.serialNumber"
-            },
-            "topicElemLen": {
-              "type": "integer",
-              "description": "maximum length of all other parts in MQTT-topics. Affected parameters: order.timestamp, order.version, order.manufacturer, instantActions.timestamp, instantActions.version, instantActions.manufacturer, state.timestamp, state.version, state.manufacturer, visualization.timestamp, visualization.version, visualization.manufacturer, connection.timestamp, connection.version, connection.manufacturer"
-            },
-            "idLen": {
-              "type": "integer",
-              "description": "maximum length of ID-Strings. Affected parameters: order.orderId, order.zoneSetId, node.nodeId, nodePosition.mapId, action.actionId, edge.edgeId, edge.startNodeId, edge.endNodeId"
-            },
-            "idNumericalOnly": {
-              "type": "boolean",
-              "description": "If true ID-strings need to contain numerical values only"
-            },
-            "enumLen": {
-              "type": "integer",
-              "description": "maximum length of ENUM- and Key-Strings. Affected parameters: action.actionType, action.blockingType, edge.direction, actionParameter.key, state.operatingMode, load.loadPosition, load.loadType, actionState.actionStatus, error.errorType, error.errorLevel, errorReference.referenceKey, info.infoType, info.infoLevel, safetyState.eStop, connection.connectionState"
-            },
-            "loadIdLen": {
-              "type": "integer",
-              "description": "maximum length of loadId Strings"
-            }
-          }
-        },
-        "maxArrayLens": {
-          "type": "object",
-          "description": "maximum lengths of arrays",
-          "properties": {
-            "order.nodes": {
-              "type": "integer",
-              "description": "maximum number of nodes per order processable by the elevator"
-            },
-            "order.edges": {
-              "type": "integer",
-              "description": "maximum number of edges per order processable by the elevator"
-            },
-            "node.actions": {
-              "type": "integer",
-              "description": "maximum number of actions per node processable by the elevator"
-            },
-            "edge.actions": {
-              "type": "integer",
-              "description": "maximum number of actions per edge processable by the elevator"
-            },
-            "actions.actionsParameters": {
-              "type": "integer",
-              "description": "maximum number of parameters per action processable by the elevator"
-            },
-            "instantActions": {
-              "type": "integer",
-              "description": "maximum number of instant actions per message processable by the elevator"
-            },
-            "trajectory.knotVector": {
-              "type": "integer",
-              "description": "maximum number of knots per trajectory processable by the elevator"
-            },
-            "trajectory.controlPoints": {
-              "type": "integer",
-              "description": "maximum number of control points per trajectory processable by the elevator"
-            },
-            "state.nodeStates": {
-              "type": "integer",
-              "description": "maximum number of nodeStates sent by the elevator, maximum number of nodes in base of elevator"
-            },
-            "state.edgeStates": {
-              "type": "integer",
-              "description": "maximum number of edgeStates sent by the elevator, maximum number of edges in base of elevator"
-            },
-            "state.loads": {
-              "type": "integer",
-              "description": "maximum number of load-objects sent by the elevator"
-            },
-            "state.actionStates": {
-              "type": "integer",
-              "description": "maximum number of actionStates sent by the elevator"
-            },
-            "state.errors": {
-              "type": "integer",
-              "description": "maximum number of errors sent by the elevator in one state-message"
-            },
-            "state.information": {
-              "type": "integer",
-              "description": "maximum number of information objects sent by the elevator in one state-message"
-            },
-            "error.errorReferences": {
-              "type": "integer",
-              "description": "maximum number of error references sent by the elevator for each error"
-            },
-            "information.infoReferences": {
-              "type": "integer",
-              "description": "maximum number of info references sent by the elevator for each information"
-            }
-          }
-        },
-        "timing": {
-          "type": "object",
-          "required": [
-            "minOrderInterval",
-            "minStateInterval"
-          ],
-          "description": "timing information",
-          "properties": {
-            "minOrderInterval": {
-              "type": "number",
-              "description": "minimum interval sending order messages to the elevator",
-              "unit": "s"
-            },
-            "minStateInterval": {
-              "type": "number",
-              "description": "minimum interval for sending state-messages",
-              "unit": "s"
-            },
-            "defaultStateInterval": {
-              "type": "number",
-              "description": "default interval for sending state-messages if not defined, the default value from the main document is used",
-              "unit": "s"
-            },
-            "visualizationInterval": {
-              "type": "number",
-              "description": "default interval for sending messages on visualization topic",
-              "unit": "s"
-            }
-          }
-        }
-      }
-    },
-    "protocolFeatures": {
-      "type": "object",
-      "required": [
-        "optionalParameters",
-        "peripheralActions"
-      ],
-      "description": "Supported features of VDA5050 protocol",
-      "properties": {
-        "optionalParameters": {
-          "type": "array",
-          "description": "list of supported and/or required optional parameters. Optional parameters, that are not listed here, are assumed to be not supported by the elevator.",
-          "items": {
-            "type": "object",
-            "required": [
-              "parameter",
-              "support"
-            ],
-            "properties": {
-              "parameter": {
-                "type": "string",
-                "description": "full name of optional parameter, e.g. “order.nodes.nodePosition.allowedDeviationTheta”"
-              },
-              "support": {
-                "type": "string",
-                "description": "type of support for the optional parameter, the following values are possible: SUPPORTED: optional parameter is supported like specified. REQUIRED: optional parameter is required for proper elevator-operation.",
-                "enum": [
-                  "SUPPORTED",
-                  "REQUIRED"
-                ]
-              },
-              "description": {
-                "type": "string",
-                "description": "free text. Description of optional parameter. E.g. Reason, why the optional parameter ‚direction‘ is necessary for this elevator-type and which values it can contain. The parameter ‘nodeMarker’ must contain unsigned interger-numbers only. Nurbs-Support is limited to straight lines and circle segments."
-              }
-            }
-          }
-        },
-        "peripheralActions": {
-          "type": "array",
-          "description": "list of all actions with parameters supported by this elevator. This includes standard actions specified in VDA5050 and manufacturer-specific actions",
-          "items": {
-            "required": [
-              "actionType",
-              "actionScopes"
-            ],
-            "type": "object",
-            "properties": {
-              "actionType": {
-                "type": "string",
-                "description": "unique actionType corresponding to action.actionType"
-              },
-              "actionDescription": {
-                "type": "string",
-                "description": "free text: description of the action"
-              },
-              "actionScopes": {
-                "type": "array",
-                "description": "list of allowed scopes for using this action-type. INSTANT: usable as instantAction, NODE: usable on nodes, EDGE: usable on edges.",
-                "items": {
-                  "type": "string",
-                  "enum": [
-                    "INSTANT",
-                    "NODE",
-                    "EDGE"
-                  ]
-                }
-              },
-              "actionParameters": {
-                "type": "array",
-                "description": "list of parameters. if not defined, the action has no parameters",
-                "items": {
-                  "type": "object",
-                  "required": [
-                    "key",
-                    "valueDataType"
-                  ],
-                  "properties": {
-                    "key": {
-                      "type": "string",
-                      "description": "key-String for Parameter"
-                    },
-                    "valueDataType": {
-                      "type": "string",
-                      "description": "data type of Value, possible data types are: BOOL, NUMBER, INTEGER, FLOAT, STRING, OBJECT, ARRAY",
-                      "enum": [
-                        "BOOL",
-                        "NUMBER",
-                        "INTEGER",
-                        "FLOAT",
-                        "STRING",
-                        "OBJECT",
-                        "ARRAY"
-                      ]
-                    },
-                    "description": {
-                      "type": "string",
-                      "description": "free text: description of the parameter"
-                    },
-                    "isOptional": {
-                      "type": "boolean",
-                      "description": "True: optional parameter"
-                    }
-                  }
-                }
-              },
-              "resultDescription": {
-                "type": "string",
-                "description": "free text: description of the resultDescription"
-              },
-              "blockingTypes": {
-                "type": "array",
-                "description": "Array of possible blocking types for defined action.",
-                "items": {
-                  "type": "string",
-                  "enum": [
-                    "NONE",
-                    "SOFT",
-                    "HARD"
-                  ]
-                }
-              }
-            }
-          }
-        }
-        }
-      }
-    },
-    "vehicleConfig": {
-      "type": "object",
-      "properties": {
-        "versions": {
-          "type": "array",
-          "description": "Array containing various hardware and software versions running on the vehicle.",
-          "items": {
-            "title": "version",
-            "type": "object",
-            "required": [
-              "key",
-              "value"
-            ],
-            "properties": {
-              "key": {
-                "type": "string",
-                "description": "The key of the version.",
-                "examples": [
-                  "softwareVersion",
-                  "cameraVersion",
-                  "plcSoftChecksum"
-                ]
-              },
-              "value": {
-                "type": "string",
-                "description": "The value of the action parameter.",
-                "examples": [
-                  "v1.03.2",
-                  "0620NL51805A0",
-                  "0x4297F30C"
-                ]
-              }
-            }
-          }
-        },
-        "network": {
-          "type": "object",
-          "properties": {
-            "dnsServers": {
-              "type": "array",
-              "description": "List of DNS servers used by the vehicle.",
-              "items": {
-                "type": "string"
-              }
-            },
-            "localIpAddress": {
-              "type": "string",
-              "description": "A priori assigned IP address of the vehicle used to communicate with the MQTT broker. Note that this IP address should not be modified/changed during operations."
-            },
-            "ntpServers": {
-              "type": "array",
-              "description": "List of NTP servers used by the vehicle.",
-              "items": {
-                "type": "string"
-              }
-            },
-            "netmask": {
-              "type": "string",
-              "description": "Network subnet mask."
-            },
-            "defaultGateway": {
-              "type": "string",
-              "description": "Default gateway used by the vehicle."
-            }
-          }
-        }
-      }
-    },
-    "service": {
-      "type": "object",
-      "description": "description of the services provided by the elevator",
-      "properties": {
-        "floors": {
-          "type": "array",
-          "description": "list of floors that the elevator can serve (e.g. by number or id)",
-          "items": {
-            "type": "string"
-          }
-        },
-        "transitionTime": {
-            "oneOf": [
-              {
-                "type": "number",
-                "description": "Constant time in seconds to travel between any two floors. Used if travel between floors takes same amount of time."
-              },
-            {
-              "type": "object",
-              "description": "Time in seconds for the elevator to move between specific floors.",
-              "additionalProperties": {
-                "type": "object",
-                "description": "Mapping from destination floor to travel time in seconds",
-                "additionalProperties": {
-                  "type": "number",
-                  "description": "Time in seconds to travel from the source floor to the target floor"
-                }
-              }
-            }
-          ]
-        },
-        "usageContext": {
-          "type": "array",
-          "description": "context of use for the elevator",
-          "items": {
-            "enum": [
-              "MAINTENANCE",
-              "GENERAL",
-              "EMERGENCY"
-            ],
-            "type": "string",
-            "default": "GENERAL"
-          }
-        },
-        "elevatorUsage": {
-          "type": "string",
-          "enum": ["HUMAN_ONLY", "BOTH", "ROBOT_ONLY"],
-          "description": "Who is allowed to use the elevator"
-      }
+   "$schema":"https://json-schema.org/draft/2020-12/schema",
+   "title":"Elevator Factsheet",
+   "description":"The factsheet provides basic information about a specific elevator type series. This information allows comparison of different elevator types and can be applied for the planning, dimensioning and simulation of an elevator system. The factsheet also includes information about elevator communication interfaces which are required for the integration of an elevator type series into a VD[M]A-5050-compliant master control.",
+   "required":[
+      "headerId",
+      "timestamp",
+      "version",
+      "manufacturer",
+      "serialNumber",
+      "typeSpecification",
+      "physicalParameters",
+      "protocolLimits",
+      "protocolFeatures",
+      "service"
+   ],
+   "subtopic":"/factsheet",
+   "type":"object",
+   "properties":{
+      "headerId":{
+         "type":"integer",
+         "description":"header ID of the message. The headerId is defined per topic and incremented by 1 with each sent (but not necessarily received) message.",
+         "minimum":0
       },
-      "required": [
-        "floors",
-        "type",
-        "elevatorUsage"
-      ]
-    },
-    "elevatorGeometry": {
-      "type": "object",
-      "description": "Detailed definition of elevator geometry",
-      "properties": {
-        "envelopes2d": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "required": [
-              "set",
-              "polygonPoints"
-            ],
-            "properties": {
-              "set": {
-                "type": "string",
-                "description": "name of the envelope curve set"
-              },
-              "polygonPoints": {
-                "type": "array",
-                "description": "envelope curve as a x/y-polygon polygon is assumed as closed and must be non-self-intersecting",
-                "items": {
-                  "type": "object",
-                  "required": [
-                    "x",
-                    "y"
-                  ],
-                  "properties": {
-                    "x": {
-                      "type": "number",
-                      "description": "x-position of polygon-point",
-                      "unit": "m"
-                    },
-                    "y": {
-                      "type": "number",
-                      "description": " y-position of polygon-point",
-                      "unit": "m"
-                    }
-                  }
-                }
-              },
-              "description": {
-                "type": "string",
-                "description": "free text: description of envelope curve set"
-              }
+      "timestamp":{
+         "type":"string",
+         "format":"date-time",
+         "description":"Timestamp in ISO8601 format (YYYY-MM-DDTHH:mm:ss.ffZ).",
+         "examples":[
+            "1991-03-11T11:40:03.12Z"
+         ]
+      },
+      "version":{
+         "type":"string",
+         "description":"Version of the VD[M]A-5050 protocol [Major].[Minor].[Patch] (e.g. 1.3.2)",
+         "examples":[
+            "2.0.0"
+         ]
+      },
+      "manufacturer":{
+         "type":"string",
+         "description":"Manufacturer of the elevator"
+      },
+      "serialNumber":{
+         "type":"string",
+         "description":"Serial number of the elevator"
+      },
+      "typeSpecification":{
+         "type":"object",
+         "description":"These parameters generally specify the class and the capabilities of the elevator",
+         "required":[
+            "seriesName",
+            "maxLoadMass",
+            "elevatorClass"
+         ],
+         "properties":{
+            "seriesName":{
+               "type":"string",
+               "description":"Free text generalized series name as specified by manufacturer"
+            },
+            "seriesDescription":{
+               "type":"string",
+               "description":"Free text human readable description of the elevator type series"
+            },
+            "maxLoadMass":{
+               "type":"number",
+               "description":"maximum loadable mass",
+               "unit":"kg",
+               "minimum":0
+            },
+            "elevatorClass":{
+               "type":"string",
+               "description":"Classification of the elevator type (e.g., traction-based)",
+               "enum":[
+                  "TRACTION",
+                  "HYDRAYLIC"
+               ]
+            },
+            "maxTravel":{
+               "type":"number",
+               "description":"Maximum travel distance of the elevator in meters specified by manufacture"
+            },
+            "maxFloors":{
+               "type":"number",
+               "description":"maximum number of floors the elevator is capable of traveling specified by manufacturer"
             }
-          },
-          "description": "2D footprint of the cabin, used for non-rectangular elevators"
-        }
+         }
+      },
+      "physicalParameters":{
+         "type":"object",
+         "description":"These parameters specify the basic physical properties of the elevator",
+         "required":[
+            "width",
+            "length",
+            "doorWidth",
+            "doorHeight",
+            "height",
+            "decelerationMax",
+            "accelerationMax",
+            "speedMax"
+         ],
+         "properties":{
+            "accelerationMax":{
+               "type":"number",
+               "description":"maximum acceleration with maximum load",
+               "unit":"m/s^2"
+            },
+            "decelerationMax":{
+               "type":"number",
+               "description":"maximum deceleration with maximum load",
+               "unit":"m/s^2"
+            },
+            "width":{
+               "type":"number",
+               "description":"height of the elevator",
+               "unit":"m"
+            },
+            "length":{
+               "type":"number",
+               "description":"length of the elevator",
+               "unit":"m"
+            },
+            "height":{
+               "type":"number",
+               "description":"inner height of the elevator cabin",
+               "unit":"m"
+            },
+            "doorWidth":{
+               "type":"number",
+               "description":"width of the elevator's door frame when doors are fully opened",
+               "unit":"m"
+            },
+            "doorHeight":{
+               "type":"number",
+               "description":"height of the elevator door frame",
+               "unit":"m"
+            },
+            "speedMax":{
+               "type":"number",
+               "description":"Maximum speed of the elevator specified by manufacturer",
+               "unit":"m/s"
+            }
+         },
+         "protocolLimits":{
+            "type":"object",
+            "required":[
+               "maxStringLens",
+               "maxArrayLens",
+               "timing"
+            ],
+            "description":"This JSON-object describes the protocol limitations of the elevator. If a parameter is not defined or set to zero then there is no explicit limit for this parameter.",
+            "properties":{
+               "maxStringLens":{
+                  "type":"object",
+                  "description":"maximum lengths of strings",
+                  "properties":{
+                     "msgLen":{
+                        "type":"integer",
+                        "description":"maximum MQTT Message length"
+                     },
+                     "topicSerialLen":{
+                        "type":"integer",
+                        "description":"maximum length of serial-number part in MQTT-topics. Affected Parameters: order.serialNumber, instantActions.serialNumber, state.SerialNumber, visualization.serialNumber, connection.serialNumber"
+                     },
+                     "topicElemLen":{
+                        "type":"integer",
+                        "description":"maximum length of all other parts in MQTT-topics. Affected parameters: order.timestamp, order.version, order.manufacturer, instantActions.timestamp, instantActions.version, instantActions.manufacturer, state.timestamp, state.version, state.manufacturer, visualization.timestamp, visualization.version, visualization.manufacturer, connection.timestamp, connection.version, connection.manufacturer"
+                     },
+                     "idLen":{
+                        "type":"integer",
+                        "description":"maximum length of ID-Strings. Affected parameters: order.orderId, order.zoneSetId, node.nodeId, nodePosition.mapId, action.actionId, edge.edgeId, edge.startNodeId, edge.endNodeId"
+                     },
+                     "idNumericalOnly":{
+                        "type":"boolean",
+                        "description":"If true ID-strings need to contain numerical values only"
+                     },
+                     "enumLen":{
+                        "type":"integer",
+                        "description":"maximum length of ENUM- and Key-Strings. Affected parameters: action.actionType, action.blockingType, edge.direction, actionParameter.key, state.operatingMode, load.loadPosition, load.loadType, actionState.actionStatus, error.errorType, error.errorLevel, errorReference.referenceKey, info.infoType, info.infoLevel, safetyState.eStop, connection.connectionState"
+                     },
+                     "loadIdLen":{
+                        "type":"integer",
+                        "description":"maximum length of loadId Strings"
+                     }
+                  }
+               },
+               "maxArrayLens":{
+                  "type":"object",
+                  "description":"maximum lengths of arrays",
+                  "properties":{
+                     "order.nodes":{
+                        "type":"integer",
+                        "description":"maximum number of nodes per order processable by the elevator"
+                     },
+                     "order.edges":{
+                        "type":"integer",
+                        "description":"maximum number of edges per order processable by the elevator"
+                     },
+                     "node.actions":{
+                        "type":"integer",
+                        "description":"maximum number of actions per node processable by the elevator"
+                     },
+                     "edge.actions":{
+                        "type":"integer",
+                        "description":"maximum number of actions per edge processable by the elevator"
+                     },
+                     "actions.actionsParameters":{
+                        "type":"integer",
+                        "description":"maximum number of parameters per action processable by the elevator"
+                     },
+                     "instantActions":{
+                        "type":"integer",
+                        "description":"maximum number of instant actions per message processable by the elevator"
+                     },
+                     "trajectory.knotVector":{
+                        "type":"integer",
+                        "description":"maximum number of knots per trajectory processable by the elevator"
+                     },
+                     "trajectory.controlPoints":{
+                        "type":"integer",
+                        "description":"maximum number of control points per trajectory processable by the elevator"
+                     },
+                     "state.nodeStates":{
+                        "type":"integer",
+                        "description":"maximum number of nodeStates sent by the elevator, maximum number of nodes in base of elevator"
+                     },
+                     "state.edgeStates":{
+                        "type":"integer",
+                        "description":"maximum number of edgeStates sent by the elevator, maximum number of edges in base of elevator"
+                     },
+                     "state.loads":{
+                        "type":"integer",
+                        "description":"maximum number of load-objects sent by the elevator"
+                     },
+                     "state.actionStates":{
+                        "type":"integer",
+                        "description":"maximum number of actionStates sent by the elevator"
+                     },
+                     "state.errors":{
+                        "type":"integer",
+                        "description":"maximum number of errors sent by the elevator in one state-message"
+                     },
+                     "state.information":{
+                        "type":"integer",
+                        "description":"maximum number of information objects sent by the elevator in one state-message"
+                     },
+                     "error.errorReferences":{
+                        "type":"integer",
+                        "description":"maximum number of error references sent by the elevator for each error"
+                     },
+                     "information.infoReferences":{
+                        "type":"integer",
+                        "description":"maximum number of info references sent by the elevator for each information"
+                     }
+                  }
+               },
+               "timing":{
+                  "type":"object",
+                  "required":[
+                     "minOrderInterval",
+                     "minStateInterval"
+                  ],
+                  "description":"timing information",
+                  "properties":{
+                     "minOrderInterval":{
+                        "type":"number",
+                        "description":"minimum interval sending order messages to the elevator",
+                        "unit":"s"
+                     },
+                     "minStateInterval":{
+                        "type":"number",
+                        "description":"minimum interval for sending state-messages",
+                        "unit":"s"
+                     },
+                     "defaultStateInterval":{
+                        "type":"number",
+                        "description":"default interval for sending state-messages if not defined, the default value from the main document is used",
+                        "unit":"s"
+                     },
+                     "visualizationInterval":{
+                        "type":"number",
+                        "description":"default interval for sending messages on visualization topic",
+                        "unit":"s"
+                     }
+                  }
+               }
+            }
+         },
+         "protocolFeatures":{
+            "type":"object",
+            "required":[
+               "optionalParameters",
+               "peripheralActions"
+            ],
+            "description":"Supported features of VDA5050 protocol",
+            "properties":{
+               "optionalParameters":{
+                  "type":"array",
+                  "description":"list of supported and/or required optional parameters. Optional parameters, that are not listed here, are assumed to be not supported by the elevator.",
+                  "items":{
+                     "type":"object",
+                     "required":[
+                        "parameter",
+                        "support"
+                     ],
+                     "properties":{
+                        "parameter":{
+                           "type":"string",
+                           "description":"full name of optional parameter, e.g. “order.nodes.nodePosition.allowedDeviationTheta”"
+                        },
+                        "support":{
+                           "type":"string",
+                           "description":"type of support for the optional parameter, the following values are possible: SUPPORTED: optional parameter is supported like specified. REQUIRED: optional parameter is required for proper elevator-operation.",
+                           "enum":[
+                              "SUPPORTED",
+                              "REQUIRED"
+                           ]
+                        },
+                        "description":{
+                           "type":"string",
+                           "description":"free text. Description of optional parameter. E.g. Reason, why the optional parameter ‚direction‘ is necessary for this elevator-type and which values it can contain. The parameter ‘nodeMarker’ must contain unsigned interger-numbers only. Nurbs-Support is limited to straight lines and circle segments."
+                        }
+                     }
+                  }
+               },
+               "peripheralActions":{
+                  "type":"array",
+                  "description":"list of all actions with parameters supported by this elevator. This includes standard actions specified in VDA5050 and manufacturer-specific actions",
+                  "items":{
+                     "required":[
+                        "actionType",
+                        "actionScopes"
+                     ],
+                     "type":"object",
+                     "properties":{
+                        "actionType":{
+                           "type":"string",
+                           "description":"unique actionType corresponding to action.actionType"
+                        },
+                        "actionDescription":{
+                           "type":"string",
+                           "description":"free text: description of the action"
+                        },
+                        "actionScopes":{
+                           "type":"array",
+                           "description":"list of allowed scopes for using this action-type. INSTANT: usable as instantAction, NODE: usable on nodes, EDGE: usable on edges.",
+                           "items":{
+                              "type":"string",
+                              "enum":[
+                                 "INSTANT",
+                                 "NODE",
+                                 "EDGE"
+                              ]
+                           }
+                        },
+                        "actionParameters":{
+                           "type":"array",
+                           "description":"list of parameters. if not defined, the action has no parameters",
+                           "items":{
+                              "type":"object",
+                              "required":[
+                                 "key",
+                                 "valueDataType"
+                              ],
+                              "properties":{
+                                 "key":{
+                                    "type":"string",
+                                    "description":"key-String for Parameter"
+                                 },
+                                 "valueDataType":{
+                                    "type":"string",
+                                    "description":"data type of Value, possible data types are: BOOL, NUMBER, INTEGER, FLOAT, STRING, OBJECT, ARRAY",
+                                    "enum":[
+                                       "BOOL",
+                                       "NUMBER",
+                                       "INTEGER",
+                                       "FLOAT",
+                                       "STRING",
+                                       "OBJECT",
+                                       "ARRAY"
+                                    ]
+                                 },
+                                 "description":{
+                                    "type":"string",
+                                    "description":"free text: description of the parameter"
+                                 },
+                                 "isOptional":{
+                                    "type":"boolean",
+                                    "description":"True: optional parameter"
+                                 }
+                              }
+                           }
+                        },
+                        "resultDescription":{
+                           "type":"string",
+                           "description":"free text: description of the resultDescription"
+                        },
+                        "blockingTypes":{
+                           "type":"array",
+                           "description":"Array of possible blocking types for defined action.",
+                           "items":{
+                              "type":"string",
+                              "enum":[
+                                 "NONE",
+                                 "SOFT",
+                                 "HARD"
+                              ]
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "vehicleConfig":{
+         "type":"object",
+         "properties":{
+            "versions":{
+               "type":"array",
+               "description":"Array containing various hardware and software versions running on the vehicle.",
+               "items":{
+                  "title":"version",
+                  "type":"object",
+                  "required":[
+                     "key",
+                     "value"
+                  ],
+                  "properties":{
+                     "key":{
+                        "type":"string",
+                        "description":"The key of the version.",
+                        "examples":[
+                           "softwareVersion",
+                           "cameraVersion",
+                           "plcSoftChecksum"
+                        ]
+                     },
+                     "value":{
+                        "type":"string",
+                        "description":"The value of the action parameter.",
+                        "examples":[
+                           "v1.03.2",
+                           "0620NL51805A0",
+                           "0x4297F30C"
+                        ]
+                     }
+                  }
+               }
+            },
+            "network":{
+               "type":"object",
+               "properties":{
+                  "dnsServers":{
+                     "type":"array",
+                     "description":"List of DNS servers used by the vehicle.",
+                     "items":{
+                        "type":"string"
+                     }
+                  },
+                  "localIpAddress":{
+                     "type":"string",
+                     "description":"A priori assigned IP address of the vehicle used to communicate with the MQTT broker. Note that this IP address should not be modified/changed during operations."
+                  },
+                  "ntpServers":{
+                     "type":"array",
+                     "description":"List of NTP servers used by the vehicle.",
+                     "items":{
+                        "type":"string"
+                     }
+                  },
+                  "netmask":{
+                     "type":"string",
+                     "description":"Network subnet mask."
+                  },
+                  "defaultGateway":{
+                     "type":"string",
+                     "description":"Default gateway used by the vehicle."
+                  }
+               }
+            }
+         }
+      },
+      "service":{
+         "type":"object",
+         "description":"description of the services provided by the elevator",
+         "properties":{
+            "floors":{
+               "type":"array",
+               "description":"list of floors that the elevator can serve (e.g. by number or id)",
+               "items":{
+                  "type":"string"
+               }
+            },
+            "transitionTime":{
+               "oneOf":[
+                  {
+                     "type":"number",
+                     "description":"Constant time in seconds to travel between any two floors. Used if travel between floors takes same amount of time."
+                  },
+                  {
+                     "type":"object",
+                     "description":"Time in seconds for the elevator to move between specific floors.",
+                     "additionalProperties":{
+                        "type":"object",
+                        "description":"Mapping from destination floor to travel time in seconds",
+                        "additionalProperties":{
+                           "type":"number",
+                           "description":"Time in seconds to travel from the source floor to the target floor"
+                        }
+                     }
+                  }
+               ]
+            },
+            "usageContext":{
+               "type":"array",
+               "description":"context of use for the elevator",
+               "items":{
+                  "enum":[
+                     "MAINTENANCE",
+                     "GENERAL",
+                     "EMERGENCY"
+                  ],
+                  "type":"string",
+                  "default":"GENERAL"
+               }
+            },
+            "elevatorUsage":{
+               "type":"string",
+               "enum":[
+                  "HUMAN_ONLY",
+                  "BOTH",
+                  "ROBOT_ONLY"
+               ],
+               "description":"Who is allowed to use the elevator"
+            }
+         },
+         "required":[
+            "floors",
+            "usageContext",
+            "elevatorUsage"
+         ]
+      },
+      "elevatorGeometry":{
+         "type":"object",
+         "description":"Detailed definition of elevator geometry",
+         "properties":{
+            "envelopes2d":{
+               "type":"array",
+               "items":{
+                  "type":"object",
+                  "required":[
+                     "set",
+                     "polygonPoints"
+                  ],
+                  "properties":{
+                     "set":{
+                        "type":"string",
+                        "description":"name of the envelope curve set"
+                     },
+                     "polygonPoints":{
+                        "type":"array",
+                        "description":"envelope curve as a x/y-polygon polygon is assumed as closed and must be non-self-intersecting",
+                        "items":{
+                           "type":"object",
+                           "required":[
+                              "x",
+                              "y"
+                           ],
+                           "properties":{
+                              "x":{
+                                 "type":"number",
+                                 "description":"x-position of polygon-point",
+                                 "unit":"m"
+                              },
+                              "y":{
+                                 "type":"number",
+                                 "description":" y-position of polygon-point",
+                                 "unit":"m"
+                              }
+                           }
+                        }
+                     },
+                     "description":{
+                        "type":"string",
+                        "description":"free text: description of envelope curve set"
+                     }
+                  }
+               },
+               "description":"2D footprint of the cabin, used for non-rectangular elevators"
+            }
+         }
       }
-    }
-  }
+   }
 }
