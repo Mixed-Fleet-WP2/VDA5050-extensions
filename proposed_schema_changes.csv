@@ -76,8 +76,7 @@ MANUAL and TEACHING.
 Redefined AUTOMATIC. Added
 DUAL and LOCAL CONTROL",state.json,elevator_state.json,Elevator control,"AGV operation modes such as SEMIAUTOMATIC, MANUAL, and TEACHING are not applicable to elevators due to fundamental differences in functionality."
 protocolFeatures.peripheralActions,Actions that the elevator exposes (including those defined by VDA5050 and custom actions),Renamed from agvActions,factsheet.json,elevator_factsheet.json,Elevator control,
-transitioning,"Indicates whether the AGV is
-driving or rotating",Replaces  driving,state.json,elevator_state.json,Elevator control,"Concepts such as rotation or driving are irrelevant for elevators, as their motion is restricted to vertical travel along a fixed path"
+transitioning,"Indicates whether the elevator is in the process of moving between floors.",Replaces  driving,state.json,elevator_state.json,Elevator control,"Concepts such as rotation or driving are irrelevant for elevators, as their motion is restricted to vertical travel along a fixed path"
 typeSpecification.elevatorClass,"Classification of the elevator type (e.g., traction-based).",Replaces agvClass,factsheet.json,elevator_factsheet.json,Elevator control,
 typeSpecification.maxFloors,Maximum number of floors the elevator is capable of traveling as specified by manufacturer,Replaces agvGeometry.envelopes2d,factsheet.json,elevator_factsheet.json,Elevator control,
 physicalParameters.speedMin,Minimal controlled continuous speed of the AGV,Removed,factsheet.json,elevator_factsheet.json,Elevator control,"Elevators don’t operate at continuous low speeds: they only accelerate, cruise, and stop. Since an elevator never needs to “drive slowly” like an AGV, this parameter isn’t relevant to elevator operation."
@@ -94,5 +93,6 @@ True indicates that the elevator re-
 quires a new base of floor nodes. Un-
 like AGVs, this flag does not imply
 deceleration",state.json,elevator_state.json,Elevator control,"The original semantics do not align with elevator behavior, as deceleration when approaching floors is predetermined and cannot be influenced by this flag."
+
 
 
