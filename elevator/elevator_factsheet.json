@@ -512,7 +512,7 @@
             }
           ]
         },
-        "type": {
+        "usageContext": {
           "type": "array",
           "description": "context of use for the elevator",
           "items": {
