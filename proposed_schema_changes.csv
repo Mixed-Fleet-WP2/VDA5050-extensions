@@ -35,12 +35,12 @@ physicalParameters.doorWidth,Width of the door frame when doors are fully opened
 physicalParameters.doorHeight,Height of the elevator door frame.,New field,factsheet.json,elevator_factsheet.json,Elevator control,
 service.floors,List of floors that the elevator can serve.,New field,factsheet.json,elevator_factsheet.json,Elevator control,
 service.transitionTime,Describes how long the elevator approximately takes to move between two floors,New field,factsheet.json,elevator_factsheet.json,Elevator control,
-doorStatus.open,Indicates whether the elevator's doors are fully opened. Complements doorsOpening.,New field,state.json,elevator_state.json,Elevator control,
-doorStatus.openingInProgress,Indicates whether the elevator's doors are in the process of opening. Complements doorsOpen,New field,state.json,elevator_state.json,Elevator control,
-doorStatus.rearDoorOpen,Indicates that the rear door is open,New field,state.json,elevator_state.json,Elevator control,
+doorStatus.open,Indicates whether the elevator's doors are fully opened. Complements openingInProgress.,New field,state.json,elevator_state.json,Elevator control,
+doorStatus.openingInProgress,Indicates whether the elevator's doors are in the process of opening. Complements doorStatus.open,New field,state.json,elevator_state.json,Elevator control,
+doorStatus.rearDoorOpen,Indicates that the rear door is open. Complements doorStatus.rearDoorOpeningInProgress.,New field,state.json,elevator_state.json,Elevator control,
 service.type,Context of use for the elevator e.g. EMERGENCY,New field,factsheet.json,elevator_factsheet.json,Elevator control,
 service.elevatorUsage,Describes who is allowed to used the elevator,New field,factsheet.json,elevator_factsheet.json,Elevator control,
-doorStatus.rearDoorOpeningInProgress,Indicates whether the elevator's rear doors are in the process of opening or closing. Optional if elevator has only one door.,New field,state.json,elevator_state.json,Elevator control,
+doorStatus.rearDoorOpeningInProgress,Indicates whether the elevator's rear doors are in the process of opening or closing. Complements doorStatus.rearDoorOpen. Optional if elevator has only one door.,New field,state.json,elevator_state.json,Elevator control,
 agvPosition,"Defines the position on a map
 in world coordinates.",Removed,state.json,elevator_state.json,Elevator control,"This field includes parameters for continuous localization (e.g., x and y coordinates and rotation), which remain constant for elevators. Since elevators do not require dynamic localization and have no intermediate state while moving between floors, these fields are unnecessary."
 batteryState,"Contains all battery-related in-
@@ -94,4 +94,5 @@ True indicates that the elevator re-
 quires a new base of floor nodes. Un-
 like AGVs, this flag does not imply
 deceleration",state.json,elevator_state.json,Elevator control,"The original semantics do not align with elevator behavior, as deceleration when approaching floors is predetermined and cannot be influenced by this flag."
+
 
